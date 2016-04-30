@@ -6,9 +6,12 @@
 
 using namespace std;
 
+#pragma once
+
 #ifndef CARS_PREFERENCES_CLASSES_H
 #define CARS_PREFERENCES_CLASSES_H
 const int NUMBER_OF_CARS = 10;
+extern int number_of_users;
 
 class Quest{
 public:
@@ -89,7 +92,7 @@ public:
 
 class Knn {
 protected:
-    vector<int> weight;
+    vector<float> weight;
     int k;
 public:
     Knn() {
@@ -101,7 +104,8 @@ public:
 
     void Show_w() {
         for(auto elem : weight) {
-            cout << elem << " ";
+            printf("%.2f ", elem);
+            //cout << elem << " ";
         }
         cout << endl;
     }
@@ -113,6 +117,9 @@ private:
     float kof_age;
     float kof_gender;
 public:
+
+    double answ_kof;
+
     Users_Knn() {
         weight.resize(4, 0);
     }
@@ -125,17 +132,21 @@ public:
 
     //vector<int> K_nearest(vector<pair<int, int>> users);
 
-    void Change_weights(const vector<int>& new_w);
+    void Change_weights(const vector<float>& new_w);
 
 };
 
-class Cars_Knn: public Knn{
+
+class Cars_Knn: public Knn {
 private:
     float kof_type;
     float kof_trans;
     float kof_eng_cap;
     float kof_fuel_cons;
 public:
+
+    double answ_kof;
+
     void Set_kof(float type, float trans, float cap, float fuel) {
         kof_type = type, kof_trans = trans, kof_eng_cap = cap, kof_fuel_cons = fuel;
     }
@@ -146,11 +157,25 @@ public:
 
     double Get_Dist(const Car& first, const Car& second);
 
-    void Change_weights(const vector<int>& new_w);
+    void Change_weights(const vector<float>& new_w);
 };
 
-class Solve {
+
+class ReadCarsData {
+public:
+    void Get_users(ifstream &file, vector<User> &users, Users_Knn &Users_par);
+    void Get_Items(ifstream &file, vector<Car> &cars, Cars_Knn &Cars_par);
 };
 
+
+class PreparerDataCars {
+public:
+    static bool find_contradict(vector<Quest> &learn, Quest tmpl, int indx);
+
+    static void clean_quest(vector<Quest> &learn);
+
+    static void Divide_Pref_Data(ifstream &file, vector<Quest> &learn_quest, vector<Quest> &test_quest,
+                          vector<Quest> &check_quest);
+};
 
 #endif //CARS_PREFERENCES_CLASSES_H

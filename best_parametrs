@@ -1,0 +1,11 @@
+MAIN SOLUTION RESULTS:
+Test Deviation =83
+Best User's K = 12
+Best Car's K = 3
+Car's weights :
+Car's_kof = 0.324913
+8 8 6 9 
+User's weights :
+2 5 0 9 
+Users_kof = 0.675087
+Wrong Answers = 38 of 298
