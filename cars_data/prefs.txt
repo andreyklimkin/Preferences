@@ -1,4 +1,3 @@
-User ID, Item1 ID, Item2 ID, Is Control
 1,9,3,0
 1,7,9,0
 1,9,1,0
